@@ -8,10 +8,9 @@
   "author": "Wouter Van den Berg <woutervandberg@gmail.com>",
   "dependencies": {
     "arrify": "^1.0.1",
-    "ava": "^0.17.0",
+    "ava": "^0.21.0",
     "bluebird": "^3.4.6",
     "currently-unhandled": "^0.4.1",
-    "electron": "^1.4.12",
     "figures": "^2.0.0",
     "has-flag": "^2.0.0",
     "is-ci": "^1.0.10",
@@ -19,6 +18,9 @@
     "object-assign": "^4.1.0",
     "pkg-conf": "^2.0.0",
     "update-notifier": "^1.0.3"
+  },
+  "peerDependencies": {
+    "electron": "^1.6.x"
   },
   "scripts": {
     "test": "xo && node cli.js && node cli.js --renderer test/renderer.js"

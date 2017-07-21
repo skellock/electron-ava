@@ -31,14 +31,9 @@ var objectAssign = require('object-assign');
 var Api = require('ava/api');
 var fork = require('./fork');
 
-function ElectronApi(options) {
-	Api.call(this, options);
-}
+module.exports = Api;
 
-util.inherits(ElectronApi, Api);
-module.exports = ElectronApi;
-
-ElectronApi.prototype._runFile = function (file, runStatus, execArgv) {
+Api.prototype._runFile = function (file, runStatus, execArgv) {
 	var hash = this.precompiler.precompileFile(file);
 	var precompiled = {};
 	var resolvedfpath = fs.realpathSync(file);

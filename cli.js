@@ -36,9 +36,9 @@ var pkgConf = require('pkg-conf');
 var isCi = require('is-ci');
 var hasFlag = require('has-flag');
 var colors = require('ava/lib/colors');
-var verboseReporter = require('ava/lib/reporters/verbose');
-var miniReporter = require('ava/lib/reporters/mini');
-var tapReporter = require('ava/lib/reporters/tap');
+var VerboseReporter = require('ava/lib/reporters/verbose');
+var MiniReporter = require('ava/lib/reporters/mini');
+var TapReporter = require('ava/lib/reporters/tap');
 var Logger = require('ava/lib/logger');
 var Watcher = require('ava/lib/watcher');
 var babelConfig = require('ava/lib/babel-config');
@@ -138,17 +138,18 @@ var api = new Api({
 	concurrency: cli.flags.concurrency ? parseInt(cli.flags.concurrency, 10) : 0,
 	updateSnapshots: cli.flags.updateSnapshots,
 	renderer: cli.flags.renderer,
-	windowOptions: conf.windowOptions
+	windowOptions: conf.windowOptions,
+	projectDir: process.cwd()
 });
 
 var reporter;
 
 if (cli.flags.tap && !cli.flags.watch) {
-	reporter = tapReporter();
+	reporter = new TapReporter();
 } else if (cli.flags.verbose || isCi) {
-	reporter = verboseReporter();
+	reporter = new VerboseReporter();
 } else {
-	reporter = miniReporter({watching: cli.flags.watch});
+	reporter = new MiniReporter({watching: cli.flags.watch});
 }
 
 reporter.api = api;
